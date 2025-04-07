@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Invoice Notification</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-family: Arial, sans-serif;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<p>Hello,</p>
+<p>This is an invoice from <strong th:text="${supplierEmail}"></strong>.</p>
+
+<p><strong>Invoice ID:</strong> <span th:text="${billingId}"></span></p>
+<p><strong>Total Amount:</strong> <span th:text="${totalAmount}"></span> <span th:text="${currencyCode}"></span></p>
+<p><strong>Tax:</strong> <span th:text="${tax}"></span></p>
+<p><strong>Invoice Date:</strong> <span th:text="${invoiceDate}"></span></p>
+<p><strong>Due Date:</strong> <span th:text="${paymentDueDate}"></span></p>
+
+<h3>Billing Lines</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+        <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="line : ${billingLines}">
+        <td th:text="${line.itemDescription}"></td>
+        <td th:text="${line.quantity}"></td>
+        <td th:text="${line.unitPrice}"></td>
+        <td th:text="${line.totalAmount}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<p>Thank you!</p>
+</body>
+</html>
