@@ -37,7 +37,7 @@ public class PlainTextNotificationStrategy implements NotificationStrategy {
 
         String htmlContent = templateEngine.process("invoice-email", context);
 
-        sendHtmlEmail("hafeefak2001@gmail.com", "Your Invoice: " + payload.getBillingId(), htmlContent);
+        sendHtmlEmail(payload.getBuyerEmail(), "Your Invoice: " + payload.getBillingId(), htmlContent);
     }
 
     private void sendHtmlEmail(String to, String subject, String htmlContent) {
@@ -47,7 +47,7 @@ public class PlainTextNotificationStrategy implements NotificationStrategy {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setTo(to);
             helper.setSubject(subject);
-            helper.setText(htmlContent, true); // true = HTML
+            helper.setText(htmlContent, true);
 
             mailSender.send(message);
             log.info("HTML email sent successfully to {}", to);
